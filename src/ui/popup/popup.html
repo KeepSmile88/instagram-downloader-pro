@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Downloader Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="header-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="url(#gradient)">
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#667eea"/>
+              <stop offset="100%" style="stop-color:#764ba2"/>
+            </linearGradient>
+          </defs>
+          <path d="M16 2a6 6 0 00-6 6v2H8a2 2 0 00-2 2v16a2 2 0 002 2h16a2 2 0 002-2V12a2 2 0 00-2-2h-2V8a6 6 0 00-6-6zm0 2a4 4 0 014 4v2H12V8a4 4 0 014-4zm0 10a3 3 0 110 6 3 3 0 010-6z"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1 class="header-title">Instagram Downloader Pro</h1>
+        <p class="header-subtitle">Advanced Download Manager</p>
+      </div>
+    </header>
+
+    <!-- Status Indicator -->
+    <div class="status-card">
+      <div class="status-indicator">
+        <div class="status-dot status-active"></div>
+        <span class="status-text">Extension Active</span>
+      </div>
+      <div class="status-info">
+        <span class="status-label">Version</span>
+        <span class="status-value" id="version">2.0.0</span>
+      </div>
+    </div>
+
+    <!-- Active Downloads Section -->
+    <section class="section" id="active-downloads-section" style="display: none;">
+      <div class="section-header">
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 5h2v5H9V5zm0 6h2v2H9v-2z"/>
+          </svg>
+          Active Downloads
+        </h2>
+      </div>
+      <div class="downloads-list" id="active-downloads-list">
+        <!-- Downloads will be inserted here -->
+      </div>
+    </section>
+
+    <!-- Recent Sessions Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V5z"/>
+          </svg>
+          Recent Sessions
+        </h2>
+        <button class="btn-link" id="view-all-sessions">View All</button>
+      </div>
+      <div class="sessions-list" id="sessions-list">
+        <div class="empty-state">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="8" y="8" width="32" height="32" rx="4"/>
+            <path d="M16 24h16M24 16v16"/>
+          </svg>
+          <p>No recent downloads</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Settings -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"/>
+          </svg>
+          Quick Settings
+        </h2>
+      </div>
+      
+      <div class="settings-grid">
+        <div class="setting-card">
+          <div class="setting-header">
+            <span class="setting-label">Delay Range</span>
+            <span class="setting-value">
+              <span id="delay-value">1.0s - 3.0s</span>
+            </span>
+          </div>
+          <div class="setting-sliders">
+            <input type="range" id="delay-min" min="500" max="5000" step="100" value="1000" class="slider">
+            <input type="range" id="delay-max" min="1000" max="10000" step="100" value="3000" class="slider">
+          </div>
+        </div>
+
+        <div class="setting-card">
+          <div class="setting-header">
+            <span class="setting-label">Concurrent Downloads</span>
+            <span class="setting-value" id="concurrent-value">3</span>
+          </div>
+          <input type="range" id="concurrent" min="1" max="5" step="1" value="3" class="slider">
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <div class="actions">
+      <button class="btn btn-primary" id="open-instagram">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 0C7.284 0 6.944.012 5.877.06 4.813.109 4.086.278 3.45.525a4.904 4.904 0 00-1.772 1.153A4.904 4.904 0 00.525 3.45C.278 4.086.109 4.813.06 5.877.012 6.944 0 7.284 0 10s.012 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.904 4.904 0 001.153 1.772 4.904 4.904 0 001.772 1.153c.636.247 1.363.416 2.427.465C6.944 19.988 7.284 20 10 20s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.904 4.904 0 001.772-1.153 4.904 4.904 0 001.153-1.772c.247-.636.416-1.363.465-2.427.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.904 4.904 0 00-1.153-1.772A4.904 4.904 0 0016.55.525C15.914.278 15.187.109 14.123.06 13.056.012 12.716 0 10 0zm0 1.802c2.67 0 2.987.01 4.041.058.976.045 1.505.207 1.858.344.467.182.8.398 1.15.748.35.35.566.683.748 1.15.137.353.299.882.344 1.858.048 1.054.058 1.37.058 4.04 0 2.671-.01 2.987-.058 4.042-.045.976-.207 1.505-.344 1.858-.182.467-.398.8-.748 1.15-.35.35-.683.566-1.15.748-.353.137-.882.299-1.858.344-1.054.048-1.37.058-4.041.058-2.67 0-2.987-.01-4.04-.058-.976-.045-1.505-.207-1.858-.344a3.097 3.097 0 01-1.15-.748 3.097 3.097 0 01-.748-1.15c-.137-.353-.299-.882-.344-1.858-.048-1.055-.058-1.37-.058-4.041 0-2.67.01-2.986.058-4.04.045-.976.207-1.505.344-1.858.182-.467.398-.8.748-1.15.35-.35.683-.566 1.15-.748.353-.137.882-.299 1.858-.344 1.054-.048 1.37-.058 4.04-.058z"/>
+        </svg>
+        Open Instagram
+      </button>
+      
+      <button class="btn btn-secondary" id="open-settings">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 6a2 2 0 100-4 2 2 0 000 4zM10 12a2 2 0 100-4 2 2 0 000 4zM10 18a2 2 0 100-4 2 2 0 000 4z"/>
+        </svg>
+        Full Settings
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <div class="footer-links">
+        <a href="#" id="view-stats" class="footer-link">Stats</a>
+        <span class="separator">•</span>
+        <a href="#" id="view-help" class="footer-link">Help</a>
+        <span class="separator">•</span>
+        <a href="#" id="view-about" class="footer-link">About</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+{
+  "manifest_version": 3,
+  "name": "Instagram Downloader Pro",
+  "version": "2.0.0",
+  "description": "Professional Instagram media downloader with advanced features including resume capability, smart filters, and beautiful UI.",
+  
+  "action": {
+    "default_popup": "src/ui/popup/popup.html",
+    "default_title": "Instagram Downloader Pro"
+  },
+  
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*",
+        "https://instagram.com/*"
+      ],
+      "js": ["src/content/index.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  
+  "permissions": [
+    "storage",
+    "downloads",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "cookies",
+    "scripting"
+  ],
+  
+  "host_permissions": [
+    "https://www.instagram.com/*",
+    "https://instagram.com/*",
+    "https://*.cdninstagram.com/*",
+    "https://*.fbcdn.net/*"
+  ],
+  
+  "optional_permissions": [
+    "downloads.shelf"
+  ],
+  
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/ui/preview/preview.html",
+        "src/ui/onboarding/onboarding.html"
+      ],
+      "matches": [
+        "https://www.instagram.com/*",
+        "https://instagram.com/*"
+      ]
+    }
+  ],
+  
+  "options_page": "src/ui/options/options.html",
+  
+  "commands": {
+    "scan-profile": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Scan current Instagram profile"
+    },
+    "toggle-panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+D",
+        "mac": "Command+Shift+D"
+      },
+      "description": "Toggle download panel"
+    },
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+I",
+        "mac": "Command+Shift+I"
+      }
+    }
+  },
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "minimum_chrome_version": "88"
+}

@@ -1,0 +1,74 @@
+{
+  "app_name": {
+    "message": "Instagram Downloader Pro"
+  },
+  "app_description": {
+    "message": "Download Instagram photos, videos, and Reels with advanced features"
+  },
+  "scan_button": {
+    "message": "Scan & Download All"
+  },
+  "scanning": {
+    "message": "Scanning posts..."
+  },
+  "scan_complete": {
+    "message": "Scan complete! Found {count} items"
+  },
+  "download_button": {
+    "message": "Download ({count})"
+  },
+  "downloading": {
+    "message": "Downloading..."
+  },
+  "download_complete": {
+    "message": "Download complete!"
+  },
+  "download_failed": {
+    "message": "Download failed"
+  },
+  "select_all": {
+    "message": "Select All"
+  },
+  "deselect_all": {
+    "message": "Deselect All"
+  },
+  "filter_all": {
+    "message": "All"
+  },
+  "filter_images": {
+    "message": "Images"
+  },
+  "filter_videos": {
+    "message": "Videos"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "delay_min": {
+    "message": "Minimum Delay"
+  },
+  "delay_max": {
+    "message": "Maximum Delay"
+  },
+  "save_settings": {
+    "message": "Save Settings"
+  },
+  "settings_saved": {
+    "message": "Settings saved successfully!"
+  },
+  "error_network": {
+    "message": "Network connection issue. Please check your internet."
+  },
+  "error_rate_limit": {
+    "message": "Rate limit reached. Waiting before retry..."
+  },
+  "error_auth": {
+    "message": "Please log in to Instagram"
+  },
+  "help": {
+    "message": "Help"
+  },
+  "about": {
+    "message": "About"
+  }
+}

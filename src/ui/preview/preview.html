@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview & Download - Instagram Downloader Pro</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <div class="preview-container">
+    <!-- Header -->
+    <header class="preview-header">
+      <div class="header-left">
+        <div class="header-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="currentColor">
+            <path d="M14 2a5 5 0 00-5 5v2H7a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V11a2 2 0 00-2-2h-2V7a5 5 0 00-5-5zm0 2a3 3 0 013 3v2h-6V7a3 3 0 013-3zm0 8a2 2 0 110 4 2 2 0 010-4z"/>
+          </svg>
+        </div>
+        <div class="header-info">
+          <h1 class="header-title" id="profile-username">Loading...</h1>
+          <p class="header-subtitle" id="profile-url">-</p>
+        </div>
+      </div>
+      
+      <div class="header-right">
+        <div class="selection-info">
+          <span id="selected-count">0</span> / <span id="total-count">0</span> selected
+        </div>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <!-- Select All / Deselect All -->
+        <button class="btn-icon" id="toggle-select-all" title="Select All">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M0 3a3 3 0 013-3h14a3 3 0 013 3v14a3 3 0 01-3 3H3a3 3 0 01-3-3V3zm3-1a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1H3zm5.293 6.707L6 10l2.293 2.293a1 1 0 001.414-1.414L8.414 10l1.293-1.293a1 1 0 00-1.414-1.414zm4 0L10 10l2.293 2.293a1 1 0 001.414-1.414L12.414 10l1.293-1.293a1 1 0 00-1.414-1.414z"/>
+          </svg>
+          <span>Select All</span>
+        </button>
+
+        <!-- Filter Buttons -->
+        <div class="filter-group">
+          <button class="btn-filter active" data-filter="all">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <path d="M2 2h14v14H2z"/>
+            </svg>
+            All (<span id="count-all">0</span>)
+          </button>
+          <button class="btn-filter" data-filter="image">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <path d="M2 2h14v14H2V2zm2 2v10h10V4H4zm1 8l2-3 2 2 3-4 3 5H5z"/>
+            </svg>
+            Images (<span id="count-images">0</span>)
+          </button>
+          <button class="btn-filter" data-filter="video">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <path d="M2 2v14h10V2H2zm2 2h6v10H4V4zm8 1l4 4-4 4V5z"/>
+            </svg>
+            Videos (<span id="count-videos">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <div class="toolbar-right">
+        <!-- View Mode Toggle -->
+        <div class="view-toggle">
+          <button class="btn-view active" data-view="grid" title="Grid View">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2 2h6v6H2V2zm10 0h6v6h-6V2zM2 12h6v6H2v-6zm10 0h6v6h-6v-6z"/>
+            </svg>
+          </button>
+          <button class="btn-view" data-view="list" title="List View">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2 4h16v2H2V4zm0 5h16v2H2V9zm0 5h16v2H2v-2z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Search -->
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z"/>
+          </svg>
+          <input type="text" id="search-input" placeholder="Search by filename or index...">
+        </div>
+
+        <!-- Sort -->
+        <select class="sort-select" id="sort-select">
+          <option value="index">Sort by Index</option>
+          <option value="type">Sort by Type</option>
+          <option value="size">Sort by Size</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Media Grid -->
+    <main class="media-grid" id="media-grid">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading media...</p>
+      </div>
+    </main>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <div class="action-bar-info">
+        <span class="info-label">Download Settings</span>
+        <div class="settings-quick">
+          <label class="checkbox-label">
+            <input type="checkbox" id="organize-folders" checked>
+            <span>Organize in folders</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="add-metadata" checked>
+            <span>Add metadata</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="action-bar-buttons">
+        <button class="btn btn-secondary" id="cancel-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 0a10 10 0 100 20 10 10 0 000-20zM5 9v2h10V9H5z"/>
+          </svg>
+          Cancel
+        </button>
+        
+        <button class="btn btn-primary" id="download-btn" disabled>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 0v12m0 0l-4-4m4 4l4-4M2 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
+          </svg>
+          Download <span id="download-count">0</span> Items
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Context Menu -->
+  <div class="context-menu" id="context-menu" style="display: none;">
+    <button class="context-menu-item" data-action="preview">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 4C4 4 1 8 1 8s3 4 7 4 7-4 7-4-3-4-7-4zm0 6a2 2 0 110-4 2 2 0 010 4z"/>
+      </svg>
+      Open Preview
+    </button>
+    <button class="context-menu-item" data-action="download-single">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 0v10m0 0l-3-3m3 3l3-3M2 13v1a2 2 0 002 2h8a2 2 0 002-2v-1"/>
+      </svg>
+      Download This
+    </button>
+    <button class="context-menu-item" data-action="copy-url">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M6 2a1 1 0 00-1 1v1H3a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-2h1a1 1 0 001-1V3a1 1 0 00-1-1H6zm7 2v5h-2V6a2 2 0 00-2-2H6V3h7z"/>
+      </svg>
+      Copy URL
+    </button>
+    <div class="context-menu-separator"></div>
+    <button class="context-menu-item" data-action="select-similar">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 2h5v5H2V2zm7 0h5v5H9V2zM2 9h5v5H2V9zm7 0h5v5H9V9z"/>
+      </svg>
+      Select All Similar
+    </button>
+  </div>
+
+  <!-- Image Lightbox -->
+  <div class="lightbox" id="lightbox" style="display: none;">
+    <div class="lightbox-header">
+      <div class="lightbox-info">
+        <span id="lightbox-filename">-</span>
+        <span class="lightbox-meta" id="lightbox-meta">-</span>
+      </div>
+      <button class="lightbox-close" id="lightbox-close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="lightbox-content">
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+          <path d="M20 6l-10 10 10 10 2-2-8-8 8-8-2-2z"/>
+        </svg>
+      </button>
+      
+      <div class="lightbox-media-container">
+        <img id="lightbox-image" alt="Preview">
+        <video id="lightbox-video" controls style="display: none;"></video>
+      </div>
+      
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+          <path d="M12 6l10 10-10 10-2-2 8-8-8-8 2-2z"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="lightbox-actions">
+      <button class="lightbox-action" id="lightbox-download">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 0v12m0 0l-4-4m4 4l4-4M2 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
+        </svg>
+        Download
+      </button>
+      <button class="lightbox-action" id="lightbox-toggle-select">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M0 3a3 3 0 013-3h14a3 3 0 013 3v14a3 3 0 01-3 3H3a3 3 0 01-3-3V3zm3-1a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1H3z"/>
+        </svg>
+        Select
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="preview.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,526 @@
+# Icon Assets Guide
+
+This extension requires icon assets in multiple sizes for different use cases.
+
+## Required Icons
+
+Create the following icon files in the `assets/icons/` directory:
+
+### Icon Sizes
+
+- **icon16.png** - 16x16px - Toolbar icon (small)
+- **icon32.png** - 32x32px - Windows taskbar
+- **icon48.png** - 48x48px - Extension management page
+- **icon128.png** - 128x128px - Chrome Web Store, installation
+
+## Design Guidelines
+
+### Style
+- **Modern and Clean** - Follow current design trends
+- **Recognizable** - Should be instantly recognizable as Instagram-related
+- **Gradient** - Use the purple gradient (#667eea to #764ba2)
+- **Download Icon** - Incorporate a download arrow or symbol
+
+### Recommended Design
+
+Main icon should feature:
+1. Instagram camera outline or stylized "IG" letters
+2. Download arrow pointing down
+3. Purple gradient background (#667eea → #764ba2)
+4. Rounded corners with 20% border radius
+
+### Color Palette
+
+Primary Gradient:
+
+Start: #667eea (Purple Blue)
+
+End: #764ba2 (Deep Purple)
+
+Accent Colors:
+
+White: #ffffff (for icons/text)
+
+Shadow: rgba(0, 0, 0, 0.1)
+
+text
+
+## Creating Icons
+
+### Option 1: Using Figma (Recommended)
+
+1. Create a new Figma file
+2. Create 128x128px frame
+3. Design your icon:
+Background: Rectangle with gradient (#667eea → #764ba2)
+
+Corner radius: 26px (20%)
+
+Add download arrow icon (white)
+
+Add Instagram camera outline (white, subtle)
+
+text
+4. Export as PNG at 1x, 2x scales
+5. Resize to required dimensions:
+- 128x128px (original)
+- 48x48px (scale down)
+- 32x32px (scale down)
+- 16x16px (scale down)
+
+### Option 2: Using Adobe Illustrator
+
+1. Create 128x128px artboard
+2. Draw icon with vector shapes
+3. Apply gradient fill
+4. Export for screens at required sizes
+
+### Option 3: Using Online Tools
+
+**Recommended Tools:**
+- [Figma](https://figma.com) - Free, web-based
+- [Canva](https://canva.com) - Easy templates
+- [Photopea](https://photopea.com) - Free Photoshop alternative
+
+**Icon Generators:**
+- [RealFaviconGenerator](https://realfavicongenerator.net/)
+- [Favicon.io](https://favicon.io/)
+
+## SVG Source (Optional)
+
+Create a master SVG icon for easy scaling:
+
+### icon.svg
+
+```svg
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+   <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+   <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+ </linearGradient>
+</defs>
+
+<!-- Background -->
+<rect width="128" height="128" rx="26" fill="url(#gradient)"/>
+
+<!-- Download Arrow -->
+<path d="M64 32 L64 72 M64 72 L48 56 M64 72 L80 56" 
+     stroke="white" 
+     stroke-width="6" 
+     stroke-linecap="round" 
+     stroke-linejoin="round"/>
+
+<!-- Base Line -->
+<path d="M40 88 L88 88" 
+     stroke="white" 
+     stroke-width="6" 
+     stroke-linecap="round"/>
+
+<!-- Instagram Camera (subtle, optional) -->
+<circle cx="64" cy="52" r="12" 
+       stroke="white" 
+       stroke-width="2" 
+       fill="none" 
+       opacity="0.3"/>
+</svg>
+Quick Start Templates
+Simple Download Icon Design
+text
+1. Create 128x128px canvas
+2. Fill with gradient: #667eea (top-left) to #764ba2 (bottom-right)
+3. Add rounded corners: 26px radius
+4. Add white download arrow (↓) in center
+5. Add subtle shadow: 0 4px 12px rgba(0,0,0,0.15)
+Example with Layers
+text
+Layer 1: Background (gradient rectangle, rounded)
+Layer 2: Download arrow (white, 48x48px centered)
+Layer 3: Instagram symbol (optional, subtle)
+Layer 4: Shadow (optional, subtle glow)
+Validation
+After creating icons, validate them:
+
+Size Check: Ensure exact pixel dimensions
+
+Format Check: Must be PNG with transparency
+
+Quality Check: No pixelation or artifacts
+
+Visibility Check: Test on both light and dark backgrounds
+
+Testing Icons
+Preview your icons:
+
+bash
+# After placing icons in assets/icons/
+npm run build
+# Load extension in Chrome and check:
+# - Extension toolbar (16x16)
+# - Extensions page (48x48)
+# - Chrome Web Store listing (128x128)
+File Structure
+text
+assets/
+└── icons/
+    ├── icon16.png    (16x16px)
+    ├── icon32.png    (32x32px)
+    ├── icon48.png    (48x48px)
+    ├── icon128.png   (128x128px)
+    └── icon.svg      (optional source)
+Tools & Resources
+Design Tools
+Figma - Professional design tool (free)
+
+Sketch - Mac only (paid)
+
+Affinity Designer - One-time purchase
+
+Icon Resources
+Heroicons - Free icon set
+
+Feather Icons - Minimalist icons
+
+Material Icons - Google icons
+
+Color Tools
+Coolors - Gradient generator
+
+uiGradients - Gradient presets
+
+Example Icon Concepts
+Concept 1: Download Badge
+Purple gradient circle
+
+White download arrow
+
+Instagram "IG" letters in corner
+
+Concept 2: Camera Download
+Instagram camera outline
+
+Download arrow integrated
+
+Purple gradient background
+
+Concept 3: Minimal Modern
+Simple download icon
+
+Purple gradient square with rounded corners
+
+Clean and professional
+
+License
+Your icon designs should be original or use properly licensed assets.
+Do not use Instagram's official logo directly to avoid trademark issues.
+
+Need help?
+
+Check out Chrome Extension Icons Guide
+
+Use the provided SVG template as a starting point
+
+text
+
+### PROJECT_STRUCTURE.md（项目结构总结）
+
+```markdown
+# Project Structure
+
+Complete file structure for Instagram Downloader Pro extension.
+
+instagram-downloader-pro/
+│
+├── manifest.json # Extension manifest (Manifest V3)
+├── package.json # NPM dependencies and scripts
+├── webpack.config.js # Webpack build configuration
+├── .babelrc # Babel configuration
+├── .gitignore # Git ignore rules
+├── README.md # Project documentation
+├── ICONS.md # Icon creation guide
+├── PROJECT_STRUCTURE.md # This file
+│
+├── assets/ # Static assets
+│ └── icons/ # Extension icons
+│ ├── icon16.png # 16x16 toolbar icon
+│ ├── icon32.png # 32x32 Windows taskbar
+│ ├── icon48.png # 48x48 extension management
+│ ├── icon128.png # 128x128 Web Store
+│ └── icon.svg # Source SVG (optional)
+│
+├── src/ # Source code
+│ │
+│ ├── background/ # Background service worker
+│ │ ├── index.js # Main entry point
+│ │ ├── session-manager.js # Session management
+│ │ ├── download-manager.js # Download coordination
+│ │ └── network-monitor.js # Network status monitoring
+│ │
+│ ├── content/ # Content scripts
+│ │ ├── index.js # Main entry point
+│ │ ├── scanner.js # Profile media scanner
+│ │ ├── ui-injector.js # UI injection into Instagram
+│ │ ├── credentials-extractor.js # Extract auth credentials
+│ │ └── content.css # Content script styles
+│ │
+│ ├── core/ # Core modules
+│ │ ├── logger.js # Logging utility
+│ │ ├── storage.js # Chrome storage wrapper
+│ │ ├── error-handler.js # Error handling
+│ │ └── media-extractor.js # Media URL extraction
+│ │
+│ ├── ui/ # User interface
+│ │ │
+│ │ ├── popup/ # Extension popup
+│ │ │ ├── popup.html
+│ │ │ ├── popup.css
+│ │ │ └── popup.js
+│ │ │
+│ │ ├── preview/ # Media preview & selection
+│ │ │ ├── preview.html
+│ │ │ ├── preview.css
+│ │ │ └── preview.js
+│ │ │
+│ │ ├── onboarding/ # First-time setup
+│ │ │ ├── onboarding.html
+│ │ │ ├── onboarding.css
+│ │ │ └── onboarding.js
+│ │ │
+│ │ ├── options/ # Settings page
+│ │ │ ├── options.html
+│ │ │ ├── options.css
+│ │ │ └── options.js
+│ │ │
+│ │ └── components/ # Reusable UI components
+│ │ ├── notification.js # Toast notifications
+│ │ ├── modal.js # Modal dialogs
+│ │ └── progress-toast.js # Download progress indicator
+│ │
+│ ├── styles/ # Global styles
+│ │ ├── global.css # CSS variables and base styles
+│ │ ├── themes.js # Theme management (light/dark)
+│ │ └── animations.js # Animation utilities
+│ │
+│ └── utils/ # Utility functions
+│ └── helpers.js # General helper functions
+│
+├── scripts/ # Build scripts
+│ └── zip.js # Create release ZIP
+│
+├── dist/ # Build output (generated)
+│ ├── manifest.json
+│ ├── background.js
+│ ├── content.js
+│ ├── content.css
+│ ├── ui/
+│ │ ├── popup/
+│ │ ├── preview/
+│ │ ├── onboarding/
+│ │ └── options/
+│ └── assets/
+│
+└── releases/ # Release packages (generated)
+└── instagram-downloader-pro-v2.0.0.zip
+
+text
+
+## File Purposes
+
+### Root Files
+
+| File | Purpose |
+|------|---------|
+| `manifest.json` | Extension configuration and permissions |
+| `package.json` | NPM dependencies and build scripts |
+| `webpack.config.js` | Build system configuration |
+| `.babelrc` | JavaScript transpilation settings |
+| `.gitignore` | Files to exclude from version control |
+
+### Background (`src/background/`)
+
+Service worker that runs in the background, handling:
+- Session management
+- Download coordination
+- Network monitoring
+- Message routing
+
+### Content (`src/content/`)
+
+Scripts injected into Instagram pages:
+- Profile scanning
+- UI injection
+- Credential extraction
+- User interaction handling
+
+### Core (`src/core/`)
+
+Shared core functionality:
+- Logging system
+- Storage abstraction
+- Error handling
+- Media URL extraction
+
+### UI (`src/ui/`)
+
+All user interface pages and components:
+- **Popup**: Quick access toolbar popup
+- **Preview**: Media selection interface
+- **Onboarding**: First-time user setup
+- **Options**: Full settings page
+- **Components**: Reusable UI elements
+
+### Styles (`src/styles/`)
+
+Global styling system:
+- CSS variables and design tokens
+- Theme management (light/dark)
+- Animation utilities
+- Responsive utilities
+
+### Utils (`src/utils/`)
+
+Helper functions and utilities used across the codebase
+
+## Build Output
+
+The `dist/` directory contains the compiled extension ready for installation:
+
+dist/
+├── manifest.json # Copied from root
+├── background.js # Compiled from src/background/index.js
+├── content.js # Compiled from src/content/index.js
+├── content.css # Copied from src/content/content.css
+├── ui/ # All UI pages
+│ ├── popup/
+│ ├── preview/
+│ ├── onboarding/
+│ └── options/
+└── assets/ # Static assets
+└── icons/
+
+text
+
+## Development Workflow
+
+### 1. Install Dependencies
+```bash
+npm install
+2. Development Build (with watch)
+bash
+npm run dev
+3. Production Build
+bash
+npm run build
+4. Create Release Package
+bash
+npm run zip
+Key Dependencies
+Production
+None - Pure JavaScript, no runtime dependencies
+
+Development
+webpack - Module bundler
+
+babel - JavaScript transpiler
+
+copy-webpack-plugin - Copy static assets
+
+mini-css-extract-plugin - Extract CSS
+
+terser-webpack-plugin - Minification
+
+Module System
+ES6 Modules - Import/export syntax
+
+Webpack - Bundles modules for Chrome
+
+Babel - Transpiles to Chrome 88+ compatible code
+
+Code Organization Principles
+1. Separation of Concerns
+Background services separate from content scripts
+
+UI components separate from business logic
+
+Core modules reusable across contexts
+
+2. Single Responsibility
+Each file has one clear purpose
+
+Classes and functions do one thing well
+
+Easy to test and maintain
+
+3. Dependency Injection
+Managers receive dependencies
+
+Easy to mock for testing
+
+Loose coupling
+
+4. Event-Driven Architecture
+Message passing for cross-context communication
+
+Event listeners for user interactions
+
+Observer pattern for state changes
+
+Communication Flow
+text
+┌─────────────┐         ┌──────────────┐
+│   Content   │ ◄─────► │  Background  │
+│   Script    │ Message │   Worker     │
+└─────────────┘ Passing └──────────────┘
+       ▲                        ▲
+       │                        │
+       ▼                        ▼
+┌─────────────┐         ┌──────────────┐
+│  Instagram  │         │   Storage    │
+│    Page     │         │   Chrome API │
+└─────────────┘         └──────────────┘
+       ▲
+       │
+       ▼
+┌─────────────┐
+│   UI Pages  │
+│  (Preview,  │
+│   Options)  │
+└─────────────┘
+Size Estimates
+Component	Estimated Size
+Background	~50 KB
+Content Script	~40 KB
+UI Pages	~100 KB
+Assets	~20 KB
+Total	~210 KB
+Browser Compatibility
+Minimum: Chrome 88 (Manifest V3 support)
+
+Recommended: Chrome 90+
+
+Tested: Chrome 120+
+
+Performance Considerations
+Lazy loading of UI components
+
+Debounced scroll events
+
+Throttled network requests
+
+Efficient DOM manipulation
+
+Minimal memory footprint
+
+Security Features
+Content Security Policy enforced
+
+No eval() or inline scripts
+
+Credentials never logged
+
+Secure storage of sensitive data
+
+Rate limiting to prevent abuse
+
+Last Updated: January 2026
+Version: 2.0.0
